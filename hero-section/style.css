@@ -1,0 +1,126 @@
+:root {
+  --hero-bg: #f8fafc;
+  --hero-text: #0f172a;
+  --hero-muted: #475569;
+  --hero-primary: #2563eb;
+  --hero-primary-hover: #1d4ed8;
+  --hero-secondary: #ffffff;
+  --hero-secondary-border: #cbd5e1;
+  --hero-secondary-hover: #f1f5f9;
+  --hero-radius: 6px;
+  --hero-max-width: 1200px;
+  --hero-gap: 3rem;
+  --hero-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --transition-speed: 0.25s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--hero-font);
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--hero-max-width);
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  gap: var(--hero-gap);
+  background: var(--hero-bg);
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--hero-text);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  color: var(--hero-muted);
+  line-height: 1.6;
+  max-width: 520px;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--hero-radius);
+  transition: all var(--transition-speed) ease;
+}
+
+.btn-primary {
+  background: var(--hero-primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--hero-primary-hover);
+}
+
+.btn-secondary {
+  background: var(--hero-secondary);
+  color: var(--hero-text);
+  border: 1px solid var(--hero-secondary-border);
+}
+
+.btn-secondary:hover {
+  background: var(--hero-secondary-hover);
+}
+
+.hero-image {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: var(--hero-radius);
+  object-fit: cover;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Tablet & mobile */
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .hero-desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-image {
+    max-width: 600px;
+    width: 100%;
+  }
+}
