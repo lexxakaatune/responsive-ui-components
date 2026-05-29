@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Form Inputs</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="form-demo">
+    <h1>Form Inputs</h1>
+
+    <form class="form-grid" novalidate>
+
+      <fieldset class="form-group">
+        <legend class="form-label">Text Inputs</legend>
+
+        <label class="input-wrapper" for="name">
+          <span class="input-label">Full Name</span>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Jane Doe"
+            required
+          />
+          <span class="input-hint">Your legal first and last name</span>
+        </label>
+
+        <label class="input-wrapper" for="email">
+          <span class="input-label">Email Address</span>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="jane@example.com"
+            required
+          />
+          <span class="input-hint">We'll never share your email</span>
+        </label>
+
+        <label class="input-wrapper" for="password">
+          <span class="input-label">Password</span>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            minlength="8"
+            required
+          />
+          <span class="input-hint">At least 8 characters</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend class="form-label">Textarea</legend>
+
+        <label class="input-wrapper" for="bio">
+          <span class="input-label">Bio</span>
+          <textarea
+            id="bio"
+            name="bio"
+            rows="4"
+            placeholder="Tell us about yourself..."
+          ></textarea>
+          <span class="input-hint">Max 200 characters</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend class="form-label">Select</legend>
+
+        <label class="input-wrapper" for="country">
+          <span class="input-label">Country</span>
+          <div class="select-wrapper">
+            <select id="country" name="country" required>
+              <option value="" disabled selected>Select a country</option>
+              <option value="us">United States</option>
+              <option value="ca">Canada</option>
+              <option value="uk">United Kingdom</option>
+              <option value="de">Germany</option>
+              <option value="fr">France</option>
+              <option value="ng">Nigeria</option>
+            </select>
+          </div>
+        </label>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend class="form-label">Checkbox</legend>
+
+        <div class="checkbox-group">
+          <label class="checkbox-wrapper">
+            <input type="checkbox" name="interests" value="design" />
+            <span class="checkbox-box" aria-hidden="true"></span>
+            <span class="checkbox-label">Design</span>
+          </label>
+
+          <label class="checkbox-wrapper">
+            <input type="checkbox" name="interests" value="development" checked />
+            <span class="checkbox-box" aria-hidden="true"></span>
+            <span class="checkbox-label">Development</span>
+          </label>
+
+          <label class="checkbox-wrapper">
+            <input type="checkbox" name="interests" value="marketing" />
+            <span class="checkbox-box" aria-hidden="true"></span>
+            <span class="checkbox-label">Marketing</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend class="form-label">Radio Group</legend>
+
+        <div class="radio-group">
+          <label class="radio-wrapper">
+            <input type="radio" name="plan" value="free" />
+            <span class="radio-circle" aria-hidden="true"></span>
+            <span class="radio-label">Free</span>
+          </label>
+
+          <label class="radio-wrapper">
+            <input type="radio" name="plan" value="pro" checked />
+            <span class="radio-circle" aria-hidden="true"></span>
+            <span class="radio-label">Pro</span>
+          </label>
+
+          <label class="radio-wrapper">
+            <input type="radio" name="plan" value="enterprise" />
+            <span class="radio-circle" aria-hidden="true"></span>
+            <span class="radio-label">Enterprise</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <legend class="form-label">Toggle Switch</legend>
+
+        <label class="toggle-wrapper">
+          <span class="toggle-label">Enable notifications</span>
+          <input type="checkbox" name="notifications" class="toggle-input" />
+          <span class="toggle-track" aria-hidden="true">
+            <span class="toggle-thumb"></span>
+          </span>
+        </label>
+
+        <label class="toggle-wrapper">
+          <span class="toggle-label">Dark mode</span>
+          <input type="checkbox" name="darkmode" class="toggle-input" checked />
+          <span class="toggle-track" aria-hidden="true">
+            <span class="toggle-thumb"></span>
+          </span>
+        </label>
+      </fieldset>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-submit">Submit</button>
+      </div>
+
+    </form>
+  </main>
+</body>
+</html>

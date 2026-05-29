@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buttons</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: var(--btn-font);
+      padding: 2rem;
+      background: #f8fafc;
+    }
+    .demo-group {
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    h3 {
+      margin-bottom: 0.75rem;
+      color: #0f172a;
+      font-size: 1.1rem;
+    }
+    .section {
+      margin-bottom: 2.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <h3>Color Variants</h3>
+    <div class="demo-group">
+      <button class="btn btn-primary btn-md">Primary</button>
+      <button class="btn btn-secondary btn-md">Secondary</button>
+      <button class="btn btn-success btn-md">Success</button>
+      <button class="btn btn-danger btn-md">Danger</button>
+      <button class="btn btn-warning btn-md">Warning</button>
+      <button class="btn btn-info btn-md">Info</button>
+      <button class="btn btn-dark btn-md">Dark</button>
+      <button class="btn btn-light btn-md">Light</button>
+      <button class="btn btn-ghost btn-md">Ghost</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Sizes</h3>
+    <div class="demo-group">
+      <button class="btn btn-primary btn-sm">Small</button>
+      <button class="btn btn-primary btn-md">Medium</button>
+      <button class="btn btn-primary btn-lg">Large</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Pill Style</h3>
+    <div class="demo-group">
+      <button class="btn btn-primary btn-md btn-pill">Primary Pill</button>
+      <button class="btn btn-success btn-md btn-pill">Success Pill</button>
+      <button class="btn btn-danger btn-md btn-pill">Danger Pill</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>States</h3>
+    <div class="demo-group">
+      <button class="btn btn-primary btn-md" disabled>Disabled</button>
+      <button class="btn btn-primary btn-md btn-disabled">Disabled Class</button>
+      <button class="btn btn-primary btn-md btn-block">Block Button</button>
+    </div>
+  </div>
+</body>
+</html>

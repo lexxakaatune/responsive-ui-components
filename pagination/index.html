@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Pagination</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="demo-page">
+    <h1>Pagination</h1>
+
+    <!-- Full pagination -->
+    <nav class="pagination" aria-label="Page navigation" data-pagination="full"></nav>
+
+    <!-- Compact pagination -->
+    <nav class="pagination pagination-compact" aria-label="Compact pagination" data-pagination="compact"></nav>
+  </main>
+
+  <script>
+    (function () {
+      const Pagination = {
+        defaults: {
+          current: 1,
+          total: 25,
+          siblingCount: 1,
+          boundaryCount: 1,
+          onChange: null,
+        },
+
+        init(container, options = {}) {
+          const config = { ...this.defaults, ...options };
+          this.render(container, config);
+          this.bind(container, config);
+        },
+
+        range(start, end) {
+          const length = end - start + 1;
+          return Array.from({ length }, (_, i) => start + i);
+        },
+
+        generateItems(current, total, siblingCount, boundaryCount) {
+          const startPages = this.range(1, Math.min(boundaryCount, total));
+          const endPages = this.range(Math.max(total - boundaryCount + 1, boundaryCount + 1), total);
+
+          const siblingsStart = Math.max(
+            Math.min(current - siblingCount, total - boundaryCount - siblingCount * 2 - 1),
+            boundaryCount + 2
+          );
+
+          const siblingsEnd = Math.min(
+            Math.max(current + siblingCount, boundaryCount + siblingCount * 2 + 2),
+            endPages.length > 0 ? endPages[0] - 2 : total - 1
+          );
+
+          const items = [];
+
+          // Prev
+          items.push({ type: 'prev', page: current - 1, disabled: current === 1 });
+
+          // Start pages
+          startPages.forEach((p) => items.push({ type: 'page', page: p, current: p === current }));
+
+          // First ellipsis
+          if (siblingsStart > boundaryCount + 2) {
+            items.push({ type: 'ellipsis' });
+          } else if (boundaryCount + 1 < total - boundaryCount) {
+            items.push({ type: 'page', page: boundaryCount + 1, current: false });
+          }
+
+          // Sibling pages
+          this.range(siblingsStart, siblingsEnd).forEach((p) =>
+            items.push({ type: 'page', page: p, current: p === current })
+          );
+
+          // Second ellipsis
+          if (siblingsEnd < total - boundaryCount - 1) {
+            items.push({ type: 'ellipsis' });
+          } else if (total - boundaryCount > boundaryCount) {
+            items.push({ type: 'page', page: total - boundaryCount, current: false });
+          }
+
+          // End pages
+          endPages.forEach((p) => items.push({ type: 'page', page: p, current: p === current }));
+
+          // Next
+          items.push({ type: 'next', page: current + 1, disabled: current === total });
+
+          return items;
+        },
+
+        render(container, config) {
+          const { current, total, siblingCount, boundaryCount } = config;
+          const items = this.generateItems(current, total, siblingCount, boundaryCount);
+          const isCompact = container.classList.contains('pagination-compact');
+
+          const list = document.createElement('ul');
+          list.className = 'pagination-list';
+
+          items.forEach((item) => {
+            const li = document.createElement('li');
+
+            if (item.type === 'ellipsis') {
+              const span = document.createElement('span');
+              span.className = 'pagination-ellipsis';
+              span.setAttribute('aria-hidden', 'true');
+              span.textContent = '...';
+              li.appendChild(span);
+              list.appendChild(li);
+              return;
+            }
+
+            if (item.type === 'prev' || item.type === 'next') {
+              const a = document.createElement(item.disabled ? 'span' : 'a');
+              a.className = `pagination-link pagination-${item.type}`;
+              if (item.disabled) {
+                a.classList.add('pagination-disabled');
+              } else {
+                a.href = '#';
+                a.setAttribute('aria-label', item.type === 'prev' ? 'Previous page' : 'Next page');
+                a.dataset.page = item.page;
+              }
+
+              const arrow = document.createElement('span');
+              arrow.setAttribute('aria-hidden', 'true');
+              arrow.textContent = item.type === 'prev' ? '←' : '→';
+              a.appendChild(arrow);
+
+              if (!isCompact) {
+                const label = document.createElement('span');
+                label.className = 'pagination-label';
+                label.textContent = item.type === 'prev' ? 'Prev' : 'Next';
+                if (item.type === 'prev') {
+                  a.insertBefore(label, arrow);
+                } else {
+                  a.appendChild(label);
+                }
+              }
+
+              li.appendChild(a);
+              list.appendChild(li);
+              return;
+            }
+
+            // Page number
+            if (item.current) {
+              const span = document.createElement('span');
+              span.className = 'pagination-link pagination-current';
+              span.setAttribute('aria-current', 'page');
+              span.setAttribute('aria-label', `Page ${item.page}, current page`);
+              span.textContent = item.page;
+              li.appendChild(span);
+            } else {
+              const a = document.createElement('a');
+              a.className = 'pagination-link';
+              a.href = '#';
+              a.setAttribute('aria-label', `Page ${item.page}`);
+              a.dataset.page = item.page;
+              a.textContent = item.page;
+              li.appendChild(a);
+            }
+
+            list.appendChild(li);
+          });
+
+          container.innerHTML = '';
+          container.appendChild(list);
+        },
+
+        bind(container, config) {
+          container.addEventListener('click', (e) => {
+            const link = e.target.closest('a[data-page]');
+            if (!link) return;
+            e.preventDefault();
+
+            const page = parseInt(link.dataset.page, 10);
+            if (page === config.current) return;
+
+            config.current = page;
+            this.render(container, config);
+            if (typeof config.onChange === 'function') config.onChange(page);
+          });
+        },
+      };
+
+      // Initialize full pagination
+      Pagination.init(document.querySelector('[data-pagination="full"]'), {
+        current: 6,
+        total: 25,
+        onChange: (page) => console.log('Page:', page),
+      });
+
+      // Initialize compact pagination
+      Pagination.init(document.querySelector('[data-pagination="compact"]'), {
+        current: 3,
+        total: 10,
+        siblingCount: 0,
+        boundaryCount: 0,
+        onChange: (page) => console.log('Compact page:', page),
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Accordion</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="accordion-section" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Frequently Asked Questions</h2>
+
+    <div class="accordion-list">
+
+      <details class="accordion-item" name="faq">
+        <summary class="accordion-trigger">
+          <span class="accordion-title">What is included in this UI kit?</span>
+          <span class="accordion-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="accordion-content">
+          <p>Each component folder contains its own HTML and CSS files. You can copy any single folder into your project without dragging in unused code. No frameworks, no build tools required.</p>
+        </div>
+      </details>
+
+      <details class="accordion-item" name="faq">
+        <summary class="accordion-trigger">
+          <span class="accordion-title">Do I need JavaScript to use these components?</span>
+          <span class="accordion-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="accordion-content">
+          <p>Most components are pure CSS. Only the navbar, modal, and alert use small vanilla JS snippets. Everything else works without scripts.</p>
+        </div>
+      </details>
+
+      <details class="accordion-item" name="faq">
+        <summary class="accordion-trigger">
+          <span class="accordion-title">Can I customize the colors easily?</span>
+          <span class="accordion-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="accordion-content">
+          <p>Yes. Every stylesheet starts with CSS custom properties in <code>:root</code>. Change a few variables and the entire component updates to match your brand.</p>
+        </div>
+      </details>
+
+      <details class="accordion-item" name="faq">
+        <summary class="accordion-trigger">
+          <span class="accordion-title">Is this accessible for screen readers?</span>
+          <span class="accordion-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="accordion-content">
+          <p>We use semantic HTML and ARIA attributes where they add value. The accordion uses native <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> elements, which are announced correctly by assistive technology without extra markup.</p>
+        </div>
+      </details>
+
+      <details class="accordion-item" name="faq">
+        <summary class="accordion-trigger">
+          <span class="accordion-title">What browsers are supported?</span>
+          <span class="accordion-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="accordion-content">
+          <p>All modern versions of Chrome, Firefox, Safari, and Edge. We use standard CSS like Flexbox, Grid, and custom properties — no experimental features.</p>
+        </div>
+      </details>
+
+    </div>
+  </section>
+</body>
+</html>

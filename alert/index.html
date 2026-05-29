@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Alert</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="demo-page">
+    <h1>Alert Demo</h1>
+
+    <!-- Success -->
+    <aside class="alert alert-success" role="alert" aria-live="polite">
+      <strong class="alert-title">Success</strong>
+      <p class="alert-message">Your changes have been saved successfully.</p>
+      <button type="button" class="alert-close" aria-label="Dismiss alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </aside>
+
+    <!-- Error -->
+    <aside class="alert alert-error" role="alert" aria-live="assertive">
+      <strong class="alert-title">Error</strong>
+      <p class="alert-message">Unable to connect to the server. Please try again later.</p>
+      <button type="button" class="alert-close" aria-label="Dismiss alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </aside>
+
+    <!-- Warning -->
+    <aside class="alert alert-warning" role="alert" aria-live="polite">
+      <strong class="alert-title">Warning</strong>
+      <p class="alert-message">Your account subscription expires in 3 days.</p>
+      <button type="button" class="alert-close" aria-label="Dismiss alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </aside>
+
+    <!-- Info -->
+    <aside class="alert alert-info" role="alert" aria-live="polite">
+      <strong class="alert-title">Info</strong>
+      <p class="alert-message">A new version of this software is available for download.</p>
+      <button type="button" class="alert-close" aria-label="Dismiss alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </aside>
+  </main>
+
+  <script>
+    document.querySelectorAll('.alert-close').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const alert = btn.closest('.alert');
+        alert.classList.add('alert-dismissed');
+        alert.addEventListener('transitionend', () => alert.remove(), { once: true });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+:root {
+  --alert-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --alert-radius: 8px;
+  --alert-padding: 1rem 1.25rem;
+  --alert-gap: 0.75rem;
+  --alert-transition: 0.3s ease;
+
+  /* Success */
+  --alert-success-bg: #f0fdf4;
+  --alert-success-border: #86efac;
+  --alert-success-text: #166534;
+  --alert-success-icon: #22c55e;
+
+  /* Error */
+  --alert-error-bg: #fef2f2;
+  --alert-error-border: #fca5a5;
+  --alert-error-text: #991b1b;
+  --alert-error-icon: #ef4444;
+
+  /* Warning */
+  --alert-warning-bg: #fffbeb;
+  --alert-warning-border: #fcd34d;
+  --alert-warning-text: #92400e;
+  --alert-warning-icon: #f59e0b;
+
+  /* Info */
+  --alert-info-bg: #eff6ff;
+  --alert-info-border: #93c5fd;
+  --alert-info-text: #1e40af;
+  --alert-info-icon: #3b82f6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--alert-font);
+  background: #f8fafc;
+  padding: 2rem 1rem;
+}
+
+.demo-page {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.demo-page h1 {
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+/* ========== ALERT ========== */
+
+.alert {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: var(--alert-padding);
+  border-radius: var(--alert-radius);
+  border-left: 4px solid transparent;
+  font-family: var(--alert-font);
+  transition: opacity var(--alert-transition), transform var(--alert-transition), max-height var(--alert-transition);
+}
+
+.alert-dismissed {
+  opacity: 0;
+  transform: translateX(20px);
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Variants */
+
+.alert-success {
+  background: var(--alert-success-bg);
+  border-left-color: var(--alert-success-icon);
+  color: var(--alert-success-text);
+}
+
+.alert-error {
+  background: var(--alert-error-bg);
+  border-left-color: var(--alert-error-icon);
+  color: var(--alert-error-text);
+}
+
+.alert-warning {
+  background: var(--alert-warning-bg);
+  border-left-color: var(--alert-warning-icon);
+  color: var(--alert-warning-text);
+}
+
+.alert-info {
+  background: var(--alert-info-bg);
+  border-left-color: var(--alert-info-icon);
+  color: var(--alert-info-text);
+}
+
+/* Title */
+
+.alert-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.alert-title::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* Message */
+
+.alert-message {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding-right: 2rem;
+}
+
+/* Close button */
+
+.alert-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: inherit;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--alert-transition), background var(--alert-transition);
+}
+
+.alert-close:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive */
+
+@media (max-width: 480px) {
+  .alert {
+    padding: 0.875rem 1rem;
+  }
+
+  .alert-message {
+    padding-right: 1.5rem;
+  }
+}

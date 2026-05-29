@@ -1,0 +1,115 @@
+:root {
+  --crumb-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --crumb-text: #475569;
+  --crumb-hover: #2563eb;
+  --crumb-current: #1e293b;
+  --crumb-separator: #cbd5e1;
+  --crumb-bg: #ffffff;
+  --crumb-border: #e2e8f0;
+  --crumb-radius: 8px;
+  --crumb-padding: 0.75rem 1.25rem;
+  --crumb-gap: 0.5rem;
+  --crumb-transition: 0.2s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--crumb-font);
+  background: #f8fafc;
+  padding: 2rem 1rem;
+  line-height: 1.5;
+}
+
+.demo-page {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.demo-page h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* ========== BREADCRUMB ========== */
+
+.breadcrumb {
+  background: var(--crumb-bg);
+  border: 1px solid var(--crumb-border);
+  border-radius: var(--crumb-radius);
+  padding: var(--crumb-padding);
+}
+
+.breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  gap: var(--crumb-gap);
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: var(--crumb-gap);
+  font-size: 0.9rem;
+}
+
+/* Separator between items */
+.breadcrumb-item:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid var(--crumb-separator);
+  border-bottom: 1.5px solid var(--crumb-separator);
+  transform: rotate(-45deg);
+  flex-shrink: 0;
+  margin-left: 0.25rem;
+}
+
+/* Links */
+.breadcrumb-link {
+  color: var(--crumb-text);
+  text-decoration: none;
+  transition: color var(--crumb-transition);
+}
+
+.breadcrumb-link:hover {
+  color: var(--crumb-hover);
+  text-decoration: underline;
+}
+
+/* Current page */
+.breadcrumb-current {
+  color: var(--crumb-current);
+  font-weight: 600;
+  cursor: default;
+}
+
+/* ========== MINIMAL VARIANT ========== */
+
+.breadcrumb-minimal {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .breadcrumb-list {
+    gap: 0.35rem;
+  }
+
+  .breadcrumb-item {
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Tabs</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="tabs-demo">
+    <h1>Tabs</h1>
+
+    <section class="tabs" aria-label="Project settings">
+      <div class="tab-list" role="tablist" aria-label="Settings categories">
+        <button
+          class="tab"
+          role="tab"
+          id="tab-general"
+          aria-selected="true"
+          aria-controls="panel-general"
+          tabindex="0"
+        >
+          General
+        </button>
+        <button
+          class="tab"
+          role="tab"
+          id="tab-security"
+          aria-selected="false"
+          aria-controls="panel-security"
+          tabindex="-1"
+        >
+          Security
+        </button>
+        <button
+          class="tab"
+          role="tab"
+          id="tab-notifications"
+          aria-selected="false"
+          aria-controls="panel-notifications"
+          tabindex="-1"
+        >
+          Notifications
+        </button>
+        <button
+          class="tab"
+          role="tab"
+          id="tab-billing"
+          aria-selected="false"
+          aria-controls="panel-billing"
+          tabindex="-1"
+        >
+          Billing
+        </button>
+      </div>
+
+      <div
+        class="tab-panel"
+        role="tabpanel"
+        id="panel-general"
+        aria-labelledby="tab-general"
+        tabindex="0"
+      >
+        <h2>General Settings</h2>
+        <p>Manage your account details, language preferences, and display options. These settings apply across all your devices.</p>
+      </div>
+
+      <div
+        class="tab-panel"
+        role="tabpanel"
+        id="panel-security"
+        aria-labelledby="tab-security"
+        tabindex="0"
+        hidden
+      >
+        <h2>Security</h2>
+        <p>Update your password, enable two-factor authentication, and review active sessions. We recommend using a password manager.</p>
+      </div>
+
+      <div
+        class="tab-panel"
+        role="tabpanel"
+        id="panel-notifications"
+        aria-labelledby="tab-notifications"
+        tabindex="0"
+        hidden
+      >
+        <h2>Notifications</h2>
+        <p>Choose how you want to be notified. You can toggle email, push, and SMS alerts for different types of activity.</p>
+      </div>
+
+      <div
+        class="tab-panel"
+        role="tabpanel"
+        id="panel-billing"
+        aria-labelledby="tab-billing"
+        tabindex="0"
+        hidden
+      >
+        <h2>Billing</h2>
+        <p>View your invoices, update payment methods, and manage your subscription plan. All transactions are encrypted.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const tabList = document.querySelector('[role="tablist"]');
+      const tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
+      const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+
+      function switchTab(newTab) {
+        const oldTab = tabs.find((t) => t.getAttribute('aria-selected') === 'true');
+        if (oldTab) {
+          oldTab.setAttribute('aria-selected', 'false');
+          oldTab.setAttribute('tabindex', '-1');
+          const oldPanel = document.getElementById(oldTab.getAttribute('aria-controls'));
+          if (oldPanel) oldPanel.hidden = true;
+        }
+
+        newTab.setAttribute('aria-selected', 'true');
+        newTab.setAttribute('tabindex', '0');
+        newTab.focus();
+
+        const newPanel = document.getElementById(newTab.getAttribute('aria-controls'));
+        if (newPanel) newPanel.hidden = false;
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => switchTab(tab));
+
+        tab.addEventListener('keydown', (e) => {
+          let index = tabs.indexOf(tab);
+
+          if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            index = (index + 1) % tabs.length;
+            switchTab(tabs[index]);
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            index = (index - 1 + tabs.length) % tabs.length;
+            switchTab(tabs[index]);
+          } else if (e.key === 'Home') {
+            e.preventDefault();
+            switchTab(tabs[0]);
+          } else if (e.key === 'End') {
+            e.preventDefault();
+            switchTab(tabs[tabs.length - 1]);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
